@@ -6,14 +6,18 @@
   
   <title>JOÃO VITOR • TEZZA PROMPTS</title>
 
-  <!-- CONFIGURAÇÃO PARA O LINK (TEXTO PURO) -->
+  <!-- CONFIGURAÇÃO PARA O LINK (OTIMIZADO PARA INSTAGRAM) -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="JOÃO VITOR • TEZZA PROMPTS">
   <meta name="twitter:description" content="TEZZA PROMPTS OFICIAL">
-  <meta name="twitter:image" content="">
+  <!-- Imagem transparente 1x1 para enganar o preview do IG -->
+  <meta name="twitter:image" content="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=">
+  
   <meta property="og:title" content="JOÃO VITOR • TEZZA PROMPTS">
   <meta property="og:description" content="TEZZA PROMPTS OFICIAL">
-  <meta property="og:image" content="">
+  <meta property="og:image" content="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=">
+  <meta property="og:image:width" content="1">
+  <meta property="og:image:height" content="1">
   <meta property="og:type" content="website">
   <meta name="description" content="TEZZA PROMPTS OFICIAL">
 
@@ -38,12 +42,16 @@
 
     body{
       font-family:'Poppins', sans-serif;
-      background: url('https://i.pinimg.com/1200x/eb/ab/98/ebab988a920547b38aaf3e6974821944.jpg') no-repeat center center fixed;
-      background-size: cover;
+      background: #000;
       min-height:100vh;
       overflow-x:hidden;
       color: white;
       position:relative;
+    }
+
+    .bg-loaded {
+      background: url('https://i.pinimg.com/1200x/eb/ab/98/ebab988a920547b38aaf3e6974821944.jpg') no-repeat center center fixed;
+      background-size: cover;
     }
 
     /* SOBREPOSIÇÃO PARA MELHORAR LEITURA */
@@ -378,16 +386,17 @@
   <div class="slash" id="slashEffect"></div>
   <!-- OVERLAY DE IMPACTO (PERMANENTE ATÉ RECARREGAR) -->
   <div class="impact-overlay" id="impactOverlay">
-    <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663690830635/IZWuGyDiyXTvLhFU.png" class="impact-image" alt="Impact">
+    <!-- Imagem carregada apenas via JS para não aparecer no preview do link -->
+    <div id="impactImageContainer"></div>
     <div class="walking-container" id="walkingArea"></div>
     <div class="copy-msg">PROMPT COPIADO!</div>
   </div>
 
   <header>
     <div class="logo">
-      <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMG00OGVlbzVma2lqOHZuaGpjNGI2MjJpa2xheTVrcXQ5b2cxbHlxZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/PmvLFkc52mAx67xLih/giphy.gif" class="nezuko-gif" alt="Nezuko Run">
-      <span>JOÃO VITOR</span>
-      <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMG00OGVlbzVma2lqOHZuaGpjNGI2MjJpa2xheTVrcXQ5b2cxbHlxZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/PmvLFkc52mAx67xLih/giphy.gif" class="nezuko-gif" alt="Nezuko Run" style="transform: scaleX(-1);">
+      <div id="logoLeft"></div>
+      <span class="pixel-text">JOÃO VITOR</span>
+      <div id="logoRight"></div>
     </div>
     <div class="sub">TEZZA PROMPTS OFICIAL</div>
   </header>
@@ -399,6 +408,7 @@
       </div>
 
 <pre id="prompt1">
+
 
 GEMINI   [MODO PRO]
 
@@ -532,10 +542,25 @@ Ultra-photorealistic Blender Cycles CGI render, cinematic realism, Seedream 5.0 
       particlesContainer.appendChild(img);
     }
 
-    // Inicializa 15 stickers
-    for(let i = 0; i < 15; i++) {
-      setTimeout(createFallingSticker, Math.random() * 5000);
-    }
+    // Carregamento dinâmico para evitar preview de imagens no link
+    window.addEventListener('DOMContentLoaded', () => {
+      // Injeta o fundo
+      document.body.classList.add('bg-loaded');
+      
+      // Injeta os GIFs do logo
+      const gifUrl = "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMG00OGVlbzVma2lqOHZuaGpjNGI2MjJpa2xheTVrcXQ5b2cxbHlxZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/PmvLFkc52mAx67xLih/giphy.gif";
+      
+      const leftLogo = document.getElementById('logoLeft');
+      const rightLogo = document.getElementById('logoRight');
+      
+      if(leftLogo) leftLogo.innerHTML = `<img src="${gifUrl}" class="nezuko-gif" alt="Nezuko Run">`;
+      if(rightLogo) rightLogo.innerHTML = `<img src="${gifUrl}" class="nezuko-gif" alt="Nezuko Run" style="transform: scaleX(-1); filter: drop-shadow(0 0 10px rgba(255,183,197,0.4));">`;
+
+      // Inicializa 15 stickers
+      for(let i = 0; i < 15; i++) {
+        setTimeout(createFallingSticker, Math.random() * 5000);
+      }
+    });
 
     // Personagens Caminhando (Links corrigidos)
     const walkingArea = document.getElementById('walkingArea');
@@ -604,8 +629,18 @@ Ultra-photorealistic Blender Cycles CGI render, cinematic realism, Seedream 5.0 
         selection.removeAllRanges();
       }
 
-      // Exibir Imagem de Impacto
+      // Exibir Imagem de Impacto (Carregamento Dinâmico)
       const overlay = document.getElementById('impactOverlay');
+      const container = document.getElementById('impactImageContainer');
+      
+      if (!container.innerHTML) {
+        const img = document.createElement('img');
+        img.src = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663690830635/IZWuGyDiyXTvLhFU.png";
+        img.className = "impact-image";
+        img.alt = "Impact";
+        container.appendChild(img);
+      }
+      
       overlay.classList.add('active');
       
       // Inicia os personagens andando na segunda parte
