@@ -6,14 +6,18 @@
   
   <title>JOÃO VITOR • TEZZA PROMPTS</title>
 
-  <!-- CONFIGURAÇÃO PARA O LINK (TEXTO PURO) -->
+  <!-- CONFIGURAÇÃO PARA O LINK (OTIMIZADO PARA INSTAGRAM) -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="JOÃO VITOR • TEZZA PROMPTS">
   <meta name="twitter:description" content="TEZZA PROMPTS OFICIAL">
-  <meta name="twitter:image" content="">
+  <!-- Imagem transparente 1x1 para enganar o preview do IG -->
+  <meta name="twitter:image" content="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=">
+  
   <meta property="og:title" content="JOÃO VITOR • TEZZA PROMPTS">
   <meta property="og:description" content="TEZZA PROMPTS OFICIAL">
-  <meta property="og:image" content="">
+  <meta property="og:image" content="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=">
+  <meta property="og:image:width" content="1">
+  <meta property="og:image:height" content="1">
   <meta property="og:type" content="website">
   <meta name="description" content="TEZZA PROMPTS OFICIAL">
 
@@ -378,7 +382,8 @@
   <div class="slash" id="slashEffect"></div>
   <!-- OVERLAY DE IMPACTO (PERMANENTE ATÉ RECARREGAR) -->
   <div class="impact-overlay" id="impactOverlay">
-    <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663690830635/IZWuGyDiyXTvLhFU.png" class="impact-image" alt="Impact">
+    <!-- Imagem carregada apenas via JS para não aparecer no preview do link -->
+    <div id="impactImageContainer"></div>
     <div class="walking-container" id="walkingArea"></div>
     <div class="copy-msg">PROMPT COPIADO!</div>
   </div>
@@ -563,8 +568,18 @@ GEMINI   [MODO PRO]
         selection.removeAllRanges();
       }
 
-      // Exibir Imagem de Impacto
+      // Exibir Imagem de Impacto (Carregamento Dinâmico)
       const overlay = document.getElementById('impactOverlay');
+      const container = document.getElementById('impactImageContainer');
+      
+      if (!container.innerHTML) {
+        const img = document.createElement('img');
+        img.src = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663690830635/IZWuGyDiyXTvLhFU.png";
+        img.className = "impact-image";
+        img.alt = "Impact";
+        container.appendChild(img);
+      }
+      
       overlay.classList.add('active');
       
       // Inicia os personagens andando na segunda parte
