@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  <title>JOÃO VITOR • TEZZA PROMPTS</title>
+
+  <!-- CONFIGURAÇÃO PARA O LINK (OTIMIZADO PARA INSTAGRAM) -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="JOÃO VITOR • TEZZA PROMPTS">
+  <meta name="twitter:description" content="TEZZA PROMPTS OFICIAL">
+  <!-- Imagem transparente 1x1 para enganar o preview do IG -->
+  <meta name="twitter:image" content="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=">
+  
+  <meta property="og:title" content="JOÃO VITOR • TEZZA PROMPTS">
+  <meta property="og:description" content="TEZZA PROMPTS OFICIAL">
+  <meta property="og:image" content="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=">
+  <meta property="og:image:width" content="1">
+  <meta property="og:image:height" content="1">
+  <meta property="og:type" content="website">
+  <meta name="description" content="TEZZA PROMPTS OFICIAL">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@700&family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --tanjiro-green: #00a86b;
+      --tanjiro-black: #1a1a1a;
+      --tanjiro-brown: #4b3621;
+      --nezuko-pink: #ffb7c5;
+      --nezuko-dark-pink: #d85f91;
+      --nezuko-blue: #a0d8ef;
+      --text-color: #2c1e1e;
+    }
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:'Poppins', sans-serif;
+      background: #000;
+      min-height:100vh;
+      overflow-x:hidden;
+      color: white;
+      position:relative;
+    }
+
+    .bg-loaded {
+      background: url('https://i.pinimg.com/1200x/eb/ab/98/ebab988a920547b38aaf3e6974821944.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    /* SOBREPOSIÇÃO PARA MELHORAR LEITURA */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ELEMENTOS CAINDO (PÉTALAS E GOTAS D'ÁGUA) */
+    .falling-elements {
+      position:fixed;
+      inset:0;
+      overflow:hidden;
+      pointer-events:none;
+      z-index:1;
+    }
+
+    .falling-elements span {
+      position:absolute;
+      top:-10%;
+      animation:fall linear infinite;
+    }
+
+    .falling-elements .petal { color: var(--nezuko-pink); font-size: 20px; }
+    .falling-elements .drop { color: var(--nezuko-blue); font-size: 15px; opacity: 0.6; }
+
+    @keyframes fall{
+      0%{ transform:translateY(-100px) rotate(0deg); }
+      100%{ transform:translateY(120vh) rotate(360deg); }
+    }
+
+    /* HEADER */
+    header{
+      position:relative;
+      z-index:2;
+      text-align:center;
+      padding:60px 20px 40px;
+    }
+
+    .logo{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:15px;
+      margin-bottom:10px;
+    }
+
+    .logo span{
+      font-family: 'Press Start 2P', cursive;
+      font-size:1.8rem;
+      color: white;
+      filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+      line-height: 1.5;
+    }
+
+    .nezuko-gif{
+      width: 100px;
+      height: auto;
+      filter: drop-shadow(0 0 10px rgba(255,183,197,0.4));
+    }
+
+    @keyframes pulse{
+      0%,100%{ transform:scale(1); }
+      50%{ transform:scale(1.1); }
+    }
+
+    .sub{
+      font-family: 'Press Start 2P', cursive;
+      color: white;
+      font-size:0.7rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 10px;
+      opacity: 0.9;
+    }
+
+    /* CONTAINER */
+    .container{
+      position:relative;
+      z-index:2;
+      max-width:800px;
+      margin:auto;
+      padding:20px;
+    }
+
+    .prompt-box{
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(15px);
+      border: 2px solid rgba(0, 168, 107, 0.3);
+      border-radius:24px;
+      padding:40px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      position:relative;
+      overflow:hidden;
+    }
+
+    /* DETALHE DA CAIXA (ESTILO BAMBU DA NEZUKO) */
+    .prompt-box::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 10px; height: 100%;
+      background: var(--tanjiro-brown);
+      border-right: 2px solid #332416;
+    }
+
+    .prompt-title{
+      font-family: 'Press Start 2P', cursive;
+      font-size:0.9rem;
+      color: white;
+      margin-bottom:25px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      line-height: 1.6;
+    }
+
+    pre{
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--tanjiro-green);
+      border-radius:15px;
+      padding:25px;
+      line-height:1.8;
+      font-size:1rem;
+      color: #e0e0e0;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    /* BOTÃO ESTILO KATANA */
+    button{
+      font-family: 'Press Start 2P', cursive;
+      margin-top:30px;
+      border:none;
+      background: linear-gradient(135deg, var(--tanjiro-green), #004d32);
+      color:white;
+      padding:16px 30px;
+      border-radius:8px;
+      cursor:pointer;
+      font-size:0.7rem;
+      transition:0.3s;
+      text-transform: uppercase;
+      box-shadow: 0 5px 15px rgba(0, 168, 107, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+    }
+
+    button:hover{
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 25px rgba(0, 168, 107, 0.6);
+      filter: brightness(1.2);
+    }
+
+
+
+    .hint{
+      margin-top:15px;
+      color: var(--nezuko-blue);
+      font-size:0.85rem;
+      opacity: 0.8;
+    }
+
+    /* PLACAR DO JOGO */
+    .scoreboard {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.7);
+      border: 2px solid var(--tanjiro-green);
+      padding: 15px;
+      border-radius: 10px;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 0.8rem;
+      color: white;
+      z-index: 1000;
+      box-shadow: 0 0 15px rgba(0, 168, 107, 0.5);
+    }
+
+    .points-popup {
+      position: fixed;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 0.7rem;
+      color: #ffd700;
+      pointer-events: none;
+      z-index: 2000;
+      animation: floatUp 0.8s ease-out forwards;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-50px); opacity: 0; }
+    }
+
+    /* IMAGEM DE IMPACTO AO COPIAR */
+    .impact-overlay {
+      position: fixed;
+      inset: 0;
+      background: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s;
+      overflow: hidden;
+    }
+
+    .impact-image {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      transform: scale(1.2);
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .impact-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .impact-overlay.active .impact-image {
+      transform: scale(1);
+    }
+
+    .copy-msg {
+      position: absolute;
+      bottom: 10%;
+      font-family: 'Press Start 2P', cursive;
+      color: white;
+      font-size: 1rem;
+      text-shadow: 0 0 10px var(--tanjiro-green);
+      animation: blink 0.5s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* PERSONAGENS CAMINHANDO */
+    .walking-container {
+      position: fixed;
+      bottom: 15%; /* Subiu um pouco mais para alinhar com a trilha */
+      left: 0;
+      width: 100%;
+      height: 450px; /* Aumentado para suportar os personagens ainda maiores */
+      pointer-events: none;
+      z-index: 10001;
+      overflow: hidden;
+    }
+
+    .walking-char {
+      position: absolute;
+      bottom: 0;
+      height: 320px; /* Aumentado para 320px conforme solicitado */
+      width: auto;
+      animation: walkAcross linear infinite;
+    }
+
+    @keyframes walkAcross {
+      from { left: 100%; }
+      to { left: -350px; }
+    }
+
+    /* EFEITO DE CORTE (SLASH) */
+    .slash {
+      position: fixed;
+      top: 50%;
+      left: -100%;
+      width: 300%;
+      height: 4px;
+      background: white;
+      box-shadow: 0 0 20px 5px var(--nezuko-blue);
+      transform: rotate(-45deg);
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0;
+    }
+
+    .slash-animate {
+      animation: slashEffect 0.4s ease-out forwards;
+    }
+
+    @keyframes slashEffect {
+      0% { left: -100%; opacity: 1; }
+      100% { left: 100%; opacity: 0; }
+    }
+
+    /* PARTÍCULAS DE IMPACTO */
+    .spark {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      animation: sparkOut 0.8s ease-out forwards;
+    }
+
+    @keyframes sparkOut {
+      0% { transform: translate(0,0) scale(1); opacity: 1; }
+      100% { transform: translate(var(--sx), var(--sy)) scale(0); opacity: 0; }
+    }
+
+    footer{
+      text-align:center;
+      padding:50px 20px;
+      color: white;
+      font-size:0.9rem;
+      letter-spacing: 1px;
+    }
+
+    @media(max-width:700px){
+      .logo span{ font-size:2.5rem; }
+      .prompt-box{ padding:25px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="scoreboard">PONTOS: <span id="score">0</span></div>
+  <div class="falling-elements" id="particles"></div>
+  <div class="slash" id="slashEffect"></div>
+  <!-- OVERLAY DE IMPACTO (PERMANENTE ATÉ RECARREGAR) -->
+  <div class="impact-overlay" id="impactOverlay">
+    <!-- Imagem carregada apenas via JS para não aparecer no preview do link -->
+    <div id="impactImageContainer"></div>
+    <div class="walking-container" id="walkingArea"></div>
+    <div class="copy-msg">PROMPT COPIADO!</div>
+  </div>
+
+  <header>
+    <div class="logo">
+      <div id="logoLeft"></div>
+      <span class="pixel-text">JOÃO VITOR</span>
+      <div id="logoRight"></div>
+    </div>
+    <div class="sub">TEZZA PROMPTS OFICIAL</div>
+  </header>
+
+  <div class="container">
+    <div class="prompt-box">
+      <div class="prompt-title">
+        JOÃO VITOR COLABORADOR
+      </div>
+
+<pre id="prompt1">
+
+
+GEMINI   [MODO PRO]
+
+Ultra-realistic cinematic avatar 3D female portrait, Blender Cycles render in CGI, inspired by Seedream 5.0 beauty realism and high-end IMVU/The Sims virtual aesthetics. Clearly a fictional digital avatar and not a real photograph. Hyper-detailed virtual influencer design with stylized CGI beauty proportions, luxury editorial aesthetics, advanced cinematic lighting, ultra-polished 3D rendering, and “TEZZA PROMPTS” text at the bottom center in elegant minimalist typography.
+
+CAMERA & COMPOSITION
+
+Vertical 9:16 aspect ratio portrait composition. Medium full-body framing from approximately the knees to the top of the head. Straight-on eye-level camera perspective with perfectly centered composition emphasizing symmetry. Subject positioned against an elegant polished marble wall with balanced negative space on both sides. Sharp focus across the face, accessories, and outfit with soft cinematic depth of field preserving architectural texture.
+
+POSE & BODY POSITIONING
+
+Subject standing upright in a regal, statuesque posture. Both arms raised symmetrically to shoulder height with elbows softly bent outward and forearms extended horizontally. Hands delicately open with palms facing upward in a ceremonial presentation pose. Shoulders relaxed, torso facing directly forward, hips centered, and one leg subtly advanced through the front slit of the dress, creating an elegant elongated silhouette.
+
+HEAD POSITION & GAZE
+
+Head lifted slightly upward and turned subtly toward the left. Chin gently elevated to reinforce a royal presence. Eyes gazing upward into the distance with composed intensity. Neck elongated gracefully, complementing the symmetrical body posture.
+
+FACIAL EXPRESSION
+
+Calm, confident, and majestic facial expression. Lips softly closed with a neutral luxurious editorial mood. Eyes convey elegance, mystery, and timeless sophistication while maintaining refined feminine softness.
+
+FACE & IDENTITY
+
+Adult female CGI avatar with a delicate oval facial structure, defined jawline, symmetrical proportions, softly sculpted cheekbones, slim refined nose bridge, large almond-shaped eyes enhanced by dramatic eyeliner and long lashes, naturally full lips with a satin finish, and smooth warm skin tone. Preserve the exact facial proportions, makeup balance, and overall visual identity while maintaining stylized CGI realism instead of photoreal human rendering.
+
+HAIR
+
+Long, straight black hair with a sleek, smooth texture and a precise center part. Hair falls evenly behind the shoulders and along the upper back with subtle natural volume near the crown. Silky strands display soft reflective highlights and realistic strand separation, moving minimally with graceful vertical flow while maintaining a polished, elegant appearance.
+
+ACCESSORIES & DETAILS
+
+Large metallic gold Egyptian-inspired ceremonial headpiece resting across the forehead with layered decorative elements. Wide sculptural gold choker necklace with engraved geometric detailing. Ornamental gold shoulder adornment draped over one shoulder. Matching gold upper-arm cuff, slim metallic bracelet, and delicate shoulder chain accents. Metallic materials display refined reflective properties with polished luxury craftsmanship. No tattoo descriptions.
+
+OUTFIT
+
+Luxurious gold metallic corset dress featuring a structured sweetheart neckline with sculpted cups and fitted waist. The lower portion is composed of numerous cascading gold chain strands creating a flowing skirt with a dramatic front opening that reveals one leg. Highly detailed metallic texture with realistic reflections, intricate craftsmanship, elegant movement, and premium couture-inspired construction.
+
+BODY & PHYSIQUE
+
+Slim feminine physique with elegant proportions, defined waistline, elongated legs, graceful shoulders, refined arms, and naturally balanced anatomy inspired by premium IMVU/The Sims avatar aesthetics. Smooth anatomical transitions and sophisticated CGI contour shading enhance the refined silhouette while preserving the original body proportions.
+
+SKIN & REALISM
+
+Ultra-detailed Seedream 5.0 skin rendering featuring realistic microtextures, subtle pores, gentle luminous highlights, physically accurate subsurface scattering, and soft natural skin sheen. Blender-quality material rendering preserves realistic depth and polished CGI aesthetics without excessive smoothing.
+
+LIGHTING
+
+Soft warm cinematic interior lighting evenly illuminating the face, body, and metallic accessories. Controlled frontal illumination enhances skin luminosity while creating realistic reflections across the gold jewelry and dress. Gentle ambient shadows reinforce depth, elegance, and luxurious editorial atmosphere.
+
+ENVIRONMENT
+
+Elegant luxury interior featuring large polished beige marble wall panels with dark marble architectural detailing along the lower section. Sophisticated indoor environment with refined classical aesthetics, premium stone textures, balanced composition, and timeless architectural elegance.
+
+MOOD & AESTHETIC
+
+Royal Egyptian-inspired luxury aesthetic combined with high-fashion editorial elegance, timeless femininity, cinematic sophistication, premium couture styling, refined virtual influencer beauty, and polished luxury-avatar presentation with a majestic ceremonial atmosphere.
+
+STYLE & RENDER QUALITY
+
+Ultra-photorealistic Blender Cycles CGI render, cinematic realism, Seedream 5.0 beauty rendering, 8K UHD quality, physically accurate lighting and materials, realistic skin micro-detail, IMVU-inspired beauty repaint style, high-fidelity feminine avatar rendering, realistic depth of field, glossy beauty aesthetic, polished virtual influencer atmosphere, advanced ray tracing, realistic reflections, luxury editorial lighting, ultra-clean cinematic render quality, and clearly fictional CGI avatar aesthetics instead of a real photograph.
+
+  
+</pre>
+
+      <button onclick="copyPrompt(event, 'prompt1')">
+        COPIAR PROMPT
+      </button>
+
+
+    </div>
+  </div>
+
+  <footer>
+    MARQUE @viitor.vuh <br><br>
+    JOÃO VITOR • TEZZA PROMPTS — Conteúdo protegido.
+  </footer>
+
+  <script>
+    // Gerar elementos caindo dinamicamente (Stickers Demon Slayer)
+    const particlesContainer = document.getElementById('particles');
+    const scoreElement = document.getElementById('score');
+    let currentScore = 0;
+
+    const stickers = [
+      'https://media.giphy.com/media/pevtIZNyb2KufnDScY/giphy.gif', // Inosuke
+      'https://media.giphy.com/media/ZmguD6H0is19sU8nUo/giphy.gif', // Obanai
+      'https://media.giphy.com/media/m4QG2buH1Ut5e3luJ1/giphy.gif', // Tengen
+      'https://media.giphy.com/media/mybHsaeept0ZLKTMXU/giphy.gif', // Nezuko
+      'https://media.giphy.com/media/8aCmhoqhcqZtl0hi6P/giphy.gif', // Zenitsu
+      'https://media.giphy.com/media/AXiuhxYnv0H48n49YG/giphy.gif'  // Tanjiro
+    ];
+    
+    function createFallingSticker() {
+      const img = document.createElement('img');
+      img.src = stickers[Math.floor(Math.random() * stickers.length)];
+      img.style.position = 'absolute';
+      img.style.top = '-100px';
+      img.style.left = Math.random() * 85 + '%';
+      img.style.width = (window.innerWidth < 700 ? 60 : 80) + 'px'; // Maior no mobile para facilitar toque
+      img.style.height = 'auto';
+      img.style.cursor = 'pointer';
+      img.style.zIndex = '100';
+      img.style.pointerEvents = 'auto';
+      img.style.touchAction = 'none'; // Previne comportamentos padrão do browser no toque
+      
+      const duration = Math.random() * 5 + 5;
+      img.style.animation = `fall ${duration}s linear forwards`;
+      
+      const handleHit = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        currentScore += 50;
+        scoreElement.innerText = currentScore;
+        
+        const posX = e.clientX || (e.touches && e.touches[0].clientX);
+        const posY = e.clientY || (e.touches && e.touches[0].clientY);
+        
+        // Popup de pontos
+        const popup = document.createElement('div');
+        popup.className = 'points-popup';
+        popup.innerText = '+50';
+        popup.style.left = posX + 'px';
+        popup.style.top = posY + 'px';
+        document.body.appendChild(popup);
+        
+        // Efeito de faíscas
+        createSparks(posX, posY);
+        
+        img.remove();
+        setTimeout(() => popup.remove(), 800);
+        createFallingSticker();
+      };
+
+      img.addEventListener('mousedown', handleHit);
+      img.addEventListener('touchstart', handleHit, {passive: false});
+
+      // Remove quando sair da tela e cria uma nova
+      setTimeout(() => {
+        if(img.parentElement) {
+          img.remove();
+          createFallingSticker();
+        }
+      }, duration * 1000);
+
+      particlesContainer.appendChild(img);
+    }
+
+    // Carregamento dinâmico para evitar preview de imagens no link
+    window.addEventListener('DOMContentLoaded', () => {
+      // Injeta o fundo
+      document.body.classList.add('bg-loaded');
+      
+      // Injeta os GIFs do logo
+      const gifUrl = "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMG00OGVlbzVma2lqOHZuaGpjNGI2MjJpa2xheTVrcXQ5b2cxbHlxZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/PmvLFkc52mAx67xLih/giphy.gif";
+      
+      const leftLogo = document.getElementById('logoLeft');
+      const rightLogo = document.getElementById('logoRight');
+      
+      if(leftLogo) leftLogo.innerHTML = `<img src="${gifUrl}" class="nezuko-gif" alt="Nezuko Run">`;
+      if(rightLogo) rightLogo.innerHTML = `<img src="${gifUrl}" class="nezuko-gif" alt="Nezuko Run" style="transform: scaleX(-1); filter: drop-shadow(0 0 10px rgba(255,183,197,0.4));">`;
+
+      // Inicializa 15 stickers
+      for(let i = 0; i < 15; i++) {
+        setTimeout(createFallingSticker, Math.random() * 5000);
+      }
+    });
+
+    // Personagens Caminhando (Links corrigidos)
+    const walkingArea = document.getElementById('walkingArea');
+    const walkers = [
+      'https://media.giphy.com/media/dup6jDyj6Yk6z5M8nN/giphy.gif', // Tanjiro
+      'https://media.giphy.com/media/Q7pDtp0bIvJFgRsHHN/giphy.gif', // Nezuko
+      'https://media.giphy.com/media/ge9Ep3RJLGlNEn0UfC/giphy.gif', // Zenitsu
+      'https://media.giphy.com/media/Qyml5wziJeHreuOdzu/giphy.gif'  // Inosuke
+    ];
+
+    function spawnWalker() {
+      const img = document.createElement('img');
+      img.src = walkers[Math.floor(Math.random() * walkers.length)];
+      img.className = 'walking-char';
+      
+      const duration = Math.random() * 15 + 20; // 20 a 35 segundos para cruzar a tela
+      img.style.animationDuration = `${duration}s`;
+      
+      walkingArea.appendChild(img);
+      
+      // Remove quando terminar a animação e spawna outro
+      setTimeout(() => {
+        img.remove();
+        spawnWalker();
+      }, duration * 1000);
+    }
+
+    // Função para iniciar os caminhantes apenas na segunda parte (Garantindo todos os 4)
+    function startWalking() {
+      // Spawna cada um dos 4 personagens especificamente para garantir que todos apareçam
+      spawnSpecificWalker(0); // Tanjiro
+      setTimeout(() => spawnSpecificWalker(1), 4000); // Nezuko
+      setTimeout(() => spawnSpecificWalker(2), 8000); // Zenitsu
+      setTimeout(() => spawnSpecificWalker(3), 12000); // Inosuke
+    }
+
+    function spawnSpecificWalker(index) {
+      const img = document.createElement('img');
+      img.src = walkers[index];
+      img.className = 'walking-char';
+      
+      const duration = 25; // Velocidade fixa para manter a ordem
+      img.style.animationDuration = `${duration}s`;
+      
+      walkingArea.appendChild(img);
+      
+      // Quando um sai, ele volta para a fila após um tempo
+      setTimeout(() => {
+        img.remove();
+        setTimeout(() => spawnSpecificWalker(index), 5000);
+      }, duration * 1000);
+    }
+
+    async function copyPrompt(event, id){
+      const el = document.getElementById(id);
+      
+      try {
+        await navigator.clipboard.writeText(el.innerText);
+      } catch(err) {
+        const range = document.createRange();
+        range.selectNodeContents(el);
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        document.execCommand('copy');
+        selection.removeAllRanges();
+      }
+
+      // Exibir Imagem de Impacto (Carregamento Dinâmico)
+      const overlay = document.getElementById('impactOverlay');
+      const container = document.getElementById('impactImageContainer');
+      
+      if (!container.innerHTML) {
+        const img = document.createElement('img');
+        img.src = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663690830635/IZWuGyDiyXTvLhFU.png";
+        img.className = "impact-image";
+        img.alt = "Impact";
+        container.appendChild(img);
+      }
+      
+      overlay.classList.add('active');
+      
+      // Inicia os personagens andando na segunda parte
+      startWalking();
+
+      // Efeito de Corte
+      const slash = document.getElementById('slashEffect');
+      slash.classList.remove('slash-animate');
+      void slash.offsetWidth;
+      slash.classList.add('slash-animate');
+
+      // Criar Faíscas
+      createSparks(event.clientX, event.clientY);
+    }
+
+    function shareWhatsApp() {
+      const text = encodeURIComponent("Confira este prompt incrível do João Vitor: " + document.getElementById('prompt1').innerText);
+      window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+    }
+
+    function shareTwitter() {
+      const text = encodeURIComponent("Confira este prompt incrível do João Vitor!");
+      window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank');
+    }
+
+    function createSparks(x, y) {
+      const colors = ['#00a86b', '#ffb7c5', '#a0d8ef', '#ffffff'];
+      for(let i = 0; i < 30; i++) {
+        const spark = document.createElement('div');
+        spark.className = 'spark';
+        spark.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        spark.style.left = x + 'px';
+        spark.style.top = y + 'px';
+        
+        const sx = (Math.random() - 0.5) * 400 + 'px';
+        const sy = (Math.random() - 0.5) * 400 + 'px';
+        spark.style.setProperty('--sx', sx);
+        spark.style.setProperty('--sy', sy);
+        
+        document.body.appendChild(spark);
+        setTimeout(() => spark.remove(), 800);
+      }
+    }
+  </script>
+
+</body>
+</html>
